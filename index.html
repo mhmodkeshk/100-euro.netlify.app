@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>The German Shift — احجز مكانك</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: #0a0a0a url('Euro100.png') center / cover no-repeat fixed;
+    background-blend-mode: overlay;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    width: 100%;
+    max-width: 480px;
+    background: rgba(10,10,10,0.55);
+    backdrop-filter: blur(2px);
+    padding: 36px 24px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,200,0,0.13) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Euro coin illustration — pure CSS */
+  .euro-coin {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #ffe066, #c8960a 60%, #7a5a00);
+    margin: 0 auto 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 54px;
+    box-shadow: 0 0 0 4px #c8960a, 0 0 30px rgba(255,210,0,0.45), 0 8px 24px rgba(0,0,0,0.6);
+    animation: glow 2.5s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+  }
+
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 0 4px #c8960a, 0 0 30px rgba(255,210,0,0.45), 0 8px 24px rgba(0,0,0,0.6); }
+    50%       { box-shadow: 0 0 0 4px #ffe066, 0 0 55px rgba(255,210,0,0.75), 0 8px 24px rgba(0,0,0,0.6); }
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #c8960a;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+
+  .hero-title .euro-word {
+    color: #FFD700;
+    font-size: 34px;
+  }
+
+  .hero-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+  }
+
+  .seats-badge {
+    display: inline-block;
+    margin-top: 14px;
+    background: rgba(255,59,48,0.15);
+    border: 1px solid rgba(255,59,48,0.4);
+    color: #ff6b6b;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 16px;
+    border-radius: 50px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── FORM CARD ── */
+  .card {
+    width: 100%;
+    max-width: 480px;
+    background: rgba(20,20,20,0.75);
+    backdrop-filter: blur(4px);
+    padding: 28px 24px 32px;
+    flex: 1;
+  }
+
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #aaa;
+    margin-bottom: 8px;
+  }
+
+  .field input, .field select {
+    width: 100%;
+    background: #1f1f1f;
+    border: 1.5px solid #2e2e2e;
+    border-radius: 14px;
+    padding: 15px 18px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    text-align: right;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .field input::placeholder { color: #444; }
+
+  .field input:focus, .field select:focus {
+    border-color: #FFD700;
+    box-shadow: 0 0 0 3px rgba(255,215,0,0.12);
+  }
+
+  .field select option { background: #1f1f1f; }
+
+  /* phone field LTR */
+  .field input[type="tel"] {
+    text-align: left;
+    direction: ltr;
+    letter-spacing: 1px;
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: 17px;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #FFD700 0%, #c8960a 100%);
+    color: #0a0a0a;
+    font-family: 'Cairo', sans-serif;
+    font-size: 18px;
+    font-weight: 900;
+    cursor: pointer;
+    margin-top: 8px;
+    box-shadow: 0 6px 24px rgba(255,215,0,0.3);
+    transition: transform 0.15s, box-shadow 0.15s;
+    letter-spacing: 0.3px;
+  }
+
+  .btn-submit:active {
+    transform: scale(0.97);
+    box-shadow: 0 3px 12px rgba(255,215,0,0.2);
+  }
+
+  .privacy-note {
+    text-align: center;
+    font-size: 11px;
+    color: #444;
+    margin-top: 16px;
+    line-height: 1.7;
+  }
+
+  /* ── SUCCESS SCREEN ── */
+  .success-screen {
+    display: none;
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+    background: rgba(10,10,10,0.7);
+    backdrop-filter: blur(4px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    text-align: center;
+  }
+
+  .success-screen.show {
+    display: flex;
+  }
+
+  .success-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #ffe066, #c8960a 60%, #7a5a00);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    margin-bottom: 28px;
+    box-shadow: 0 0 0 6px rgba(255,215,0,0.2), 0 0 50px rgba(255,215,0,0.35);
+    animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  }
+
+  @keyframes pop {
+    from { transform: scale(0.3); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+  }
+
+  .success-title {
+    font-size: 30px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .success-name {
+    color: #FFD700;
+  }
+
+  .success-body {
+    font-size: 15px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.8;
+    max-width: 320px;
+    margin: 0 auto 32px;
+  }
+
+  .success-divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #FFD700, transparent);
+    margin: 0 auto 28px;
+  }
+
+  .success-footer {
+    font-size: 12px;
+    color: #333;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* Error state */
+  .field input.error {
+    border-color: #ff4444;
+  }
+  .err-msg {
+    font-size: 11px;
+    color: #ff6b6b;
+    margin-top: 5px;
+    display: none;
+  }
+  .err-msg.show { display: block; }
+</style>
+</head>
+<body>
+
+<!-- FORM VIEW -->
+<div id="formView" style="width:100%;max-width:480px;display:flex;flex-direction:column;min-height:100vh;">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="euro-coin">💶</div>
+    <div class="hero-tag">The German Shift</div>
+    <div class="hero-title">
+      مرتبك<br><span class="euro-word">باليورو 💰</span>
+    </div>
+    <div class="hero-sub">
+      اضرب مرتبك في 5 أضعاف — الـ Salary باليورو والـ Commission باليورو
+    </div>
+    <div class="seats-badge">🔥 متبقي أقل من 100 مقعد</div>
+  </div>
+
+  <!-- Form -->
+  <div class="card">
+
+    <div class="field">
+      <label>الاسم بالكامل</label>
+      <input type="text" id="inp_name" placeholder="اكتب اسمك هنا..." maxlength="60">
+      <div class="err-msg" id="err_name">من فضلك ادخل اسمك</div>
+    </div>
+
+    <div class="field">
+      <label>رقم تليفونك</label>
+      <input type="tel" id="inp_phone" placeholder="01xxxxxxxxx" maxlength="15" inputmode="numeric">
+      <div class="err-msg" id="err_phone">ادخل رقم تليفون صحيح</div>
+    </div>
+
+    <div class="field">
+      <label>اسم الشركة اللي بتشتغل فيها</label>
+      <select id="inp_company">
+        <option value="" disabled selected>اختار الشركة...</option>
+        <option>Voda...</option>
+        <option>Oran...</option>
+        <option>W..</option>
+        <option>Ets..</option>
+        <option>بنك</option>
+        <option>أخرى</option>
+      </select>
+      <div class="err-msg" id="err_company">اختار الشركة</div>
+    </div>
+
+    <button class="btn-submit" onclick="submitForm()">
+      احجز مكانك مجاناً ←
+    </button>
+
+    <div class="privacy-note">
+      بياناتك آمنة ومش هتتشارك مع أي جهة خارجية<br>
+      هيتواصل معاك فريقنا قريباً لتأكيد الحجز
+    </div>
+
+  </div>
+</div>
+
+<!-- SUCCESS VIEW -->
+<div class="success-screen" id="successView">
+  <div class="success-icon">✅</div>
+  <div class="success-title">
+    تم حجز مكانك<br>
+    <span class="success-name" id="success_name"></span> 🎉
+  </div>
+  <div class="success-divider"></div>
+  <div class="success-body">
+    استنى — هيتواصل معاك فريقنا قريباً لتأكيد مكانك في المحاضرة التعريفية.<br><br>
+    خطوة واحدة فصلتك عن مرتبك <strong style="color:#FFD700">باليورو</strong>.
+  </div>
+  <div class="success-footer">The German Shift · طنطا</div>
+</div>
+
+<script>
+function validate() {
+  let ok = true;
+
+  const name    = document.getElementById('inp_name').value.trim();
+  const phone   = document.getElementById('inp_phone').value.trim();
+  const company = document.getElementById('inp_company').value;
+
+  if (name.length < 2) {
+    document.getElementById('inp_name').classList.add('error');
+    document.getElementById('err_name').classList.add('show');
+    ok = false;
+  } else {
+    document.getElementById('inp_name').classList.remove('error');
+    document.getElementById('err_name').classList.remove('show');
+  }
+
+  if (!/^[\d\+]{10,15}$/.test(phone.replace(/\s/g,''))) {
+    document.getElementById('inp_phone').classList.add('error');
+    document.getElementById('err_phone').classList.add('show');
+    ok = false;
+  } else {
+    document.getElementById('inp_phone').classList.remove('error');
+    document.getElementById('err_phone').classList.remove('show');
+  }
+
+  if (!company) {
+    document.getElementById('inp_company').classList.add('error');
+    document.getElementById('err_company').classList.add('show');
+    ok = false;
+  } else {
+    document.getElementById('inp_company').classList.remove('error');
+    document.getElementById('err_company').classList.remove('show');
+  }
+
+  return ok ? { name, phone, company } : null;
+}
+
+function submitForm() {
+  const data = validate();
+  if (!data) return;
+
+  const { name, phone, company } = data;
+
+  const msg = encodeURIComponent(
+    `🔥 طلب حجز - The German Shift\n\n` +
+    `الاسم: ${name}\n` +
+    `التليفون: ${phone}\n` +
+    `الشركة: ${company}\n\n` +
+    `أنا عايز أحجز مكاني في المنحة 💶`
+  );
+
+  const waNumber = '201034518125';
+  const waURL = `https://wa.me/${waNumber}?text=${msg}`;
+
+  window.open(waURL, '_blank');
+
+  document.getElementById('success_name').textContent = name;
+  document.getElementById('formView').style.display   = 'none';
+  document.getElementById('successView').classList.add('show');
+
+  window.scrollTo(0, 0);
+}
+</script>
+
+</body>
+</html>
